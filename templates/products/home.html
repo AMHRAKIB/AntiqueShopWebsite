@@ -1,14 +1,61 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 
 {% block jquery %}
     //alert("Welcome!");
 {% endblock %}
 
+{% block jumbotron %}
+	<din class="container">
+		  <div class="jumbotron">
+		        <h1>Hello {{username_is}}</h1>
+		        <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser's viewport.</p>
+		        <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
+		      </div>
+	</din>
+{% endblock %}
+
+
 {% block content %}
-      <div class="jumbotron">
-        <h1>Hello {{username_is}}</h1>
-        <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser's viewport.</p>
-        <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
-      </div>
+    
+
+<div class="row">
+	
+	{% for product in products %}
+	<div class="col-sm-4">
+
+		<div class="thumbnail">
+			{% if product.productimage_set.all %}
+
+					{% for item in product.productimage_set.all %}
+
+					     {% if item.featured %}
+						<img class='img-responsive' src="{{ MEDIA_URL }}{{item.image}}"/>
+						{% endif %}
+
+						{% endfor %}
+						{% else %}
+						<img class='img-responsive' src='{% static "img/placeholder.svg" %}'/>
+						{% endif%}
+					 <div class="caption">
+						        <a href = '{{ product.get_absolute_url }}'>{{product.title}}</a>
+						        <p>...</p>
+						        <p><a href="{{ product.get_absolute_url }}" class="btn btn-primary" role="button">View</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+						      </div>
+				    	</div>
+					<!-- <a href = '/products/{{product.slug}}'>{{product.title}}</a> -->
+					<!-- <a href = '{% url "single_product" product.slug %}'>{{product.title}}</a> -->
+				<!-- 	<a href = '{{ product.get_absolute_url }}'>{{product.title}}</a>
+					{{product.price}}
+				 -->
+
+					</div>
+		{% cycle "" "" "</div><div class='row'><div class='col-sm-4'>" %}
+
+			{% endfor %}
+
+
+
+		</div>
+
 {% endblock %}

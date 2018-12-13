@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products',
+    'carts'
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 'django.template.context_processors.i18n',
+                # 'django.templates.context_processors.media',
+                # 'django.templates.context_processors.static',
+                # 'django.templates.context_processors.tz',
             ],
         },
     },
@@ -101,6 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -119,7 +125,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static","media")
+MEDIA_ROOT = '/Users/rakib/desktop/ecommerce/static/media/'
+
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static","static_root")
+
+STATICFILES_DIRS=(
+    os.path.join(os.path.dirname(BASE_DIR),"static","static_files"),
+)
+
 
 TEMPLATE_DIRS = (
-
+    os.path.join(BASE_DIR,'templates'),
 )
