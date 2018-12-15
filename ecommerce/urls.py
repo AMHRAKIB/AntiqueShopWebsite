@@ -15,29 +15,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from django.conf.urls import  include,url
-from products.views import home,search,all,single
+from django.conf.urls import include, url
+from products.views import home, search, all, single
 
 from carts.views import view, update_cart
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+
 admin.autodiscover()
 
 urlpatterns = [
-   re_path(r'^$',home,name='home'),
-    re_path(r'^s/$',search,name='search'),
-    re_path(r'^products/$',all, name='products'),
-    re_path(r'^products/(?P<slug>[\w-]+)/$', single, name='single_product'),
-    re_path(r'^cart/(?P<slug>[\w-]+)/$', update_cart, name='update_cart'),
-    re_path(r'^cart/$',view,name='cart'),
+                  re_path(r'^$', home, name='home'),
+                  re_path(r'^s/$', search, name='search'),
+                  re_path(r'^products/$', all, name='products'),
+                  re_path(r'^products/(?P<slug>[\w-]+)/$', single, name='single_product'),
+                  re_path(r'^cart/(?P<slug>[\w-]+)/$', update_cart, name='update_cart'),
+                  re_path(r'^cart/$', view, name='cart'),
 
-    path('admin/', admin.site.urls),
-]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('admin/', admin.site.urls),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # from django.conf import settings
 # from django.conf.urls import  include,url

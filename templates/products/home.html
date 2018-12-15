@@ -30,7 +30,7 @@
 					{% for item in product.productimage_set.all %}
 
 					     {% if item.featured %}
-						<img class='img-responsive' src="{{ MEDIA_URL }}{{item.image}}"/>
+						<img class='img-responsive' src="media/{{ MEDIA_URL }}{{item.image}}"/>
 						{% endif %}
 
 						{% endfor %}
