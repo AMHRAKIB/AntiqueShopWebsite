@@ -1,10 +1,40 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 {% block content %}
 
 <h1>Search for : {{query}}</h1>
 
 {{products}}
 
+<table class="table">
+    <thead>
+    <th>
+
+    </th>
+    <th>
+        Product
+    </th>
+    </thead>
+
+    <tbody>
+    {% for product in products %}
+    <tr>
+        <td style="width:160px; height:160px;margin:0 auto;">
+            <div style='width:160px;
+						height:160px;
+						background-image: url("media/{{ MEDIA_URL }}{{ item.image }}");
+						background=size:cover;'>
+        </td>
+        <td>
+            <a href='{{ product.get_absolute_url }}'>
+            {{ product.title }}</a>
+        </td>
+        <td>
+            {{ product.price }}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
