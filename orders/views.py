@@ -1,13 +1,20 @@
 from django.urls import reverse
 import time
 from django.shortcuts import render, HttpResponseRedirect
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 from carts.models import Cart
 
 from .models import Oder
+from .utils import id_generator
 
 
+def orders(request):
+    context = {}
+    template = "orders/user.html"
+    return render(request, template, context)
+
+@login_required
 def checkout(request):
     try:
         the_id = request.session['cart_id']
@@ -15,13 +22,17 @@ def checkout(request):
     except:
         the_id = None
         return HttpResponseRedirect(reverse("cart"))
-
-    new_order, created = Oder.objects.get_or_create(cart=cart)
-    if created:
-        new_order.order_id = str(time.time())
+    try:
+        new_order = Oder.objects.get(cart=cart)
+    except Oder.DoesNotExist:
+        new_order = Oder()
+        new_order.cart = cart
+        new_order.user = request.user
+        new_order.order_id = id_generator()
         new_order.save()
+    except:
+        return HttpResponseRedirect(reverse("cart"))
     if new_order.status == "Finish":
-        cart.delete()
         del request.session['cart_id']
         del request.session['items_total']
     context = {}
