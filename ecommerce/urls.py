@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from django.conf.urls import include, url
+
+from orders.views import checkout
 from products.views import home, search, all, single
 
 from carts.views import view, update_cart
@@ -32,7 +34,7 @@ urlpatterns = [
                   re_path(r'^products/(?P<slug>[\w-]+)/$', single, name='single_product'),
                   re_path(r'^cart/(?P<slug>[\w-]+)/$', update_cart, name='update_cart'),
                   re_path(r'^cart/$', view, name='cart'),
-
+                  re_path(r'^checkout/$',checkout, name='checkout'),
                   path('admin/', admin.site.urls),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
