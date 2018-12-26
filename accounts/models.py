@@ -29,7 +29,7 @@ def get_or_create_stripe(sender, user, *args, **kwargs):
         )
     except:
         pass
-    print(customer)
+
 
 
 user_logged_in.connect(get_or_create_stripe)

@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf.urls import include, url
 
+from accounts.views import logout_view, login_view, registration_view
 from orders.views import checkout, orders
 from products.views import home, search, all, single
 
@@ -36,6 +37,9 @@ urlpatterns = [
                   re_path(r'^cart/$', view, name='cart'),
                   re_path(r'^checkout/$',checkout, name='checkout'),
                   re_path(r'^orders/$',orders, name='orders'),
+                  re_path(r'^accounts/logout/$',logout_view,name='auth_logout'),
+                  re_path(r'^accounts/login/$',login_view,name='auth_login'),
+                  re_path(r'^accounts/register/$',registration_view,name='auth_register'),
                   path('admin/', admin.site.urls),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
