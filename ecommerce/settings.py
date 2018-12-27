@@ -27,6 +27,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DEFAULT_FROM_EMAIL = "Antique Shop <scout.wordh@gmail.com>"
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "scout.wordh@gmail.com"
+EMAIL_HOST_PASSWORD = "helloworld3070"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 # Application definition
 
