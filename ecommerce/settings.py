@@ -35,7 +35,10 @@ EMAIL_HOST_PASSWORD = "helloworld3070"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-
+if DEBUG:
+    SITE_URL = "http://127.0.0.1:8000"
+if not DEBUG:
+    SITE_URL = "google.com"
 # Application definition
 
 INSTALLED_APPS = [

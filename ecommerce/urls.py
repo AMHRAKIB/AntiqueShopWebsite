@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf.urls import include, url
 
-from accounts.views import logout_view, login_view, registration_view
+from accounts.views import logout_view, login_view, registration_view, activation_view
 from orders.views import checkout, orders
 from products.views import home, search, all, single
 
@@ -40,6 +40,7 @@ urlpatterns = [
                   re_path(r'^accounts/logout/$',logout_view,name='auth_logout'),
                   re_path(r'^accounts/login/$',login_view,name='auth_login'),
                   re_path(r'^accounts/register/$',registration_view,name='auth_register'),
+                  re_path(r'^accounts/activate/(?P<activation_key>\w+)/$', activation_view, name='activation_view'),
                   path('admin/', admin.site.urls),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

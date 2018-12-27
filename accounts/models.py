@@ -2,6 +2,7 @@ import stripe
 import random
 import hashlib
 from django.db import models
+from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.signals import user_logged_in
@@ -31,7 +32,7 @@ class EmailConfirmed(models.Model):
         return str(self.confirmed)
 
     def activate_user_email(self):
-        activation_url = "http://localhost:8000/accounts/activate/%s" %(self.activation_key)
+        activation_url = "%s%s" %(settings.SITE_URL, reverse("activation_view", args = [self.activation_key]))
         context = {
             "activation_key":self.activation_key,
             "activation_url":activation_url,
